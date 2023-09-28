@@ -4,12 +4,12 @@
       <meta name="viewport" content="width=device-width,
          maximum-scale=0.9,user-scalable=0">
       <meta charset="UTF-8">
-      <title>Data Creator</title>
+      <title>Drawing Predictor</title>
       <link rel="stylesheet" href="styles.css"/>
    </head>
    <body>
       <div id="content">
-         <h1>Data Creator</h1>
+         <h1>Drawing Predictor</h1>
          <div>
             <input id="student" type="text"
                placeholder="type your name"/>
@@ -27,70 +27,95 @@
       <script src="js/sketchPad.js"></script>
 
       <script>
+         //sets index to 
          let index=0;
          const labels=["car","fish","house","tree",
             "bicycle","guitar","pencil","clock"];
-
+         
+         //data that will be saved
          const data={
             student:null,
             session:new Date().getTime(),
             drawings:{}
          };
-
+         //create a new sketch pad object
          const sketchPad=
             new SketchPad(sketchPadContainer);
-
+         //start function that is called when start button is clicked
          function start(){
+            //check for value entered into textbox
             if(student.value==""){
                alert("Please type your name first!");
                return;
             }
+            //sets name value to name value in data object
             data.student=student.value;
+            //hides the input field
             student.style.display="none";
+            //makes the sketch pad visible
             sketchPadContainer.style.visibility="visible";
+            //sets label to each entry in labels
             const label=labels[index];
+            //displays instruction to user
             instructions.innerHTML="Please draw a "+label;
+            //displays NEXT button
             advanceBtn.innerHTML="NEXT";
+            //calls next when button is clicked
             advanceBtn.onclick=next;
          }
-
+         
          function next(){
+            //if no drawing dont continue
             if(sketchPad.paths.length==0){
                alert("Draw something first!");
                return;
             }
-
+            //sets label to each entry in labels
             const label=labels[index];
+            //sets the label to the drawing created by the user
             data.drawings[label]=sketchPad.paths;
+            //resets the canvas
             sketchPad.reset();
             index++;
+            //if the index is smaller than the length of the array then continue to the next drawing
             if(index<labels.length){
                const nextLabel=labels[index];
                instructions.innerHTML="Please draw a "+nextLabel;
-            }else{
+         
+            }
+            //if there are no more labels then the canvas is hidden and the user is presented with a save button
+            else{
                sketchPadContainer.style.visibility="hidden";
                instructions.innerHTML="Thank you!";
                advanceBtn.innerHTML="SAVE";
                advanceBtn.onclick=save;
             }
          }
-
+         //save function that will save the users drawings
          function save(){
+            //Hides the button
             advanceBtn.style.display='none';
+            //instructions for user
             instructions.innerHTML="Take your downloaded file and place it alongside the others in the dataset!";
-
+            //creates an anchor element in the DOM
             const element=document.createElement('a');
+            //sets the href attribute in the anchor to a data URL 
+            //that contains the JSON rep of the data object 
             element.setAttribute('href', 
                'data:text/plain;charset=utf-8,'+
                encodeURIComponent(JSON.stringify(data))
             );
-
+            //sets the extension of the file to .json
             const fileName=data.session+".json";
+            //sets the download attribute of the anchor, specifies the name of the file to be downloaded
             element.setAttribute('download', fileName);
-
+            //hides the anchor element
             element.style.display='none';
+            //appends anchor element to the body
             document.body.appendChild(element);
+            //
             element.click();
+            //
             document.body.removeChild(element);
          }
       </script>
