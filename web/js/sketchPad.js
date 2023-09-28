@@ -30,28 +30,42 @@ class SketchPad{
     }
     //reset function that is called when we need to clear the canvas
     reset(){
+        //reset the array that stores the path of the mouse
        this.paths=[];
+       //set is.drawing to false
        this.isDrawing=false;
+       //call to redraw to update the canvas
        this.#redraw();
     }
- 
+    //event liseteners for mouse functions
     #addEventListeners(){
+        //triggers when mouse button is pressed down on the canvas
        this.canvas.onmousedown=(evt)=>{
+          //gets mouse's cooridinates
           const mouse=this.#getMouse(evt);
+          //adds a new drawing path to the array, starting with the current coordinates 
           this.paths.push([mouse]);
+          //sets isdrawing to true
           this.isDrawing=true;
        }
+       //triggered when the mouse is moved over the canvas
        this.canvas.onmousemove=(evt)=>{
+            //checks is user is currently drwaing
           if(this.isDrawing){
+            //call to get mouse to get the coordinates
              const mouse=this.#getMouse(evt);
+             //adds the current coordinates to the paths array
              const lastPath=this.paths[this.paths.length-1];
              lastPath.push(mouse);
+             //call to redraw to update the canvas
              this.#redraw();
           }
        }
+       //triggered when mouse button is released
        document.onmouseup=()=>{
           this.isDrawing=false;
        }
+       //triggered when a touch event is started on the canvas
        this.canvas.ontouchstart=(evt)=>{
           const loc=evt.touches[0];
           this.canvas.onmousedown(loc);
