@@ -67,35 +67,48 @@ class SketchPad{
        }
        //triggered when a touch event is started on the canvas
        this.canvas.ontouchstart=(evt)=>{
+          //retrieves the coordinates of the first touch
           const loc=evt.touches[0];
+          //simulates a mouse down event
           this.canvas.onmousedown(loc);
        }
+       //triggered when the mouse is moved across the canvas
        this.canvas.ontouchmove=(evt)=>{
+          //retrieves the coordinates of the first touch
           const loc=evt.touches[0];
+          //simulates a mouse move event
           this.canvas.onmousemove(loc);
        }
+       //triggered when a touch event ends anywhere on the document
        document.ontouchend=()=>{
+          //simulates a mouse up event
           document.onmouseup();
        }
+       //function to handle erasing the canvas when the UNDO button is clicked
        this.undoBtn.onclick=()=>{
           this.paths.pop();
           this.#redraw();
        }
     }
- 
+    //redraw function to redraw the canvas to reflect changes
     #redraw(){
+        //clears the canvas by filing it with a transparent background
        this.ctx.clearRect(0,0,
           this.canvas.width,this.canvas.height);
+        //fills the canvas in with the paths array
        draw.paths(this.ctx,this.paths);
+       //checks for path length and enables or diasables the undo button accordingly
        if(this.paths.length>0){
           this.undoBtn.disabled=false;
        }else{
           this.undoBtn.disabled=true;
        }
     }
- 
+    //function to get mouse/touch coordinates
     #getMouse=(evt)=>{
+       //gets the position of the rectangleular canvas relative to the viewport
        const rect=this.canvas.getBoundingClientRect();
+       //calculates and returns and array of the x and y coordinates of the mouse/touch event
        return [
           Math.round(evt.clientX-rect.left),
           Math.round(evt.clientY-rect.top)
