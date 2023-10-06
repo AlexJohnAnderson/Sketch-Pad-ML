@@ -17,13 +17,13 @@ fileNames.forEach(fn=>{
     const content=fs.readFileSync(
         constants.RAW_DIR+"/"+fn
     );
-    const{session, student, drawings}=JSON.parse(content);
+    const{session, user, drawings}=JSON.parse(content);
     for(let label in drawings){
     samples.push({
         id,
         label,
-        student_name:student,
-        student_id:session
+        user_name:user,
+        session_id:session
     });
 
     const paths = drawings[label];
@@ -38,6 +38,8 @@ fileNames.forEach(fn=>{
 });
 
 fs.writeFileSync(constants.SAMPLES, JSON.stringify(samples));
+
+fs.writeFileSync(constants.SAMPLES_JS, "const samples="+JSON.stringify(samples)+";");
 
 function generateImageFile(outFile, paths){
     ctx.clearRect(0, 0, canvas.width, canvas.height);

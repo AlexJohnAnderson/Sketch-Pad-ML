@@ -11,7 +11,7 @@
       <div id="content">
          <h1>Drawing Predictor</h1>
          <div>
-            <input id="student" type="text"
+            <input id="user" type="text"
                placeholder="type your name"/>
             <span id="instructions"></span>
             <button id="advanceBtn" onclick="start();">
@@ -34,7 +34,7 @@
          
          //data that will be saved
          const data={
-            student:null,
+            user:null,
             session:new Date().getTime(),
             drawings:{}
          };
@@ -44,14 +44,14 @@
          //start function that is called when start button is clicked
          function start(){
             //check for value entered into textbox
-            if(student.value==""){
+            if(user.value==""){
                alert("Please type your name first!");
                return;
             }
             //sets name value to name value in data object
-            data.student=student.value;
+            data.user=user.value;
             //hides the input field
-            student.style.display="none";
+            user.style.display="none";
             //makes the sketch pad visible
             sketchPadContainer.style.visibility="visible";
             //sets label to each entry in labels
