@@ -1,5 +1,16 @@
 const utils={};
 
+utils.styles={
+    car:'gray',
+    fish:'blue',
+    house:'pink',
+    tree:'green',
+    bicycle:'cyan',
+    guitar:'brown',
+    pancil:'yellow',
+    clock:'black',
+}
+
 utils.formatPercent=(n)=>{
     return (n*100).toFixed(2)+"%";
 }

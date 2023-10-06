@@ -33,11 +33,19 @@ body{
    align-items:center;
 }
 .thumb{
-   width:10%;
+   width:100%;
 }
 .rowLabel{
-   width:15%;
-   text-overflow:hidden;
+   flex: 2 1 0;
+   text-overflow: ellipsis;
    overflow:hidden;
    white-space:nowrap;
+}
+.sampleContainer{
+   flex: 1 1 0;
+   background-color:White;
+   text-align:center;
+   border-radius:10%;
+   margin:1px;
+   overflow:hidden;
 }

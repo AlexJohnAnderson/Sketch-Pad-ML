@@ -18,11 +18,13 @@ function createRow(container, studentName, samples){
         const sampleLabel=document.createElement("img");
         sampleLabel.innerHTML=label;
         sampleContainer.appendChild(sampleLabel);
+
         
         const img=document.createElement('img');
         img.src=constants.IMG_DIR+'/'+id+'.png';
         img.classList.add("thumb");
-        sampleContainer
-        row.appendChild(img);
+        sampleContainer.appendChild(img);
+
+        row.appendChild(sampleContainer);
     }
 }
