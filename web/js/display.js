@@ -28,3 +28,18 @@ function createRow(container, studentName, samples){
         row.appendChild(sampleContainer);
     }
 }
+
+function handleClick(sample){
+    const el=document.getElementById("sample_"+sample.id);
+    el.classList.add("emphasize");
+    el.scrollIntoView({behavior:'auto', block:'center'})
+}
+
+function toggleInput(){
+    if(chartContainer.style.display=="none"){
+        chartContainer.style.display="block";
+    }
+    else{
+        chartContainer.style.display="none";
+    }
+}

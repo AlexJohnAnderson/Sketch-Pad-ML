@@ -1,14 +1,14 @@
 const utils={};
 
 utils.styles={
-    car:'gray',
-    fish:'blue',
-    house:'pink',
-    tree:'green',
-    bicycle:'cyan',
-    guitar:'brown',
-    pancil:'yellow',
-    clock:'black',
+    car:{color:'gray', text:'🚗'},
+    fish:{color:'blue', text:'🐟'},
+    house:{color:'pink', text:'🏠'},
+    tree:{color:'green', text:'🌳'},
+    bicycle:{color:'cyan', text:'🚲'},
+    guitar:{color:'brown', text:'🎸'},
+    pencil:{color:'yellow', text:'✏️'},
+    clock:{color:'black', text:'⏰'},
 }
 
 utils.formatPercent=(n)=>{

@@ -1,5 +1,5 @@
 class SketchPad{
-    constructor(container,size=400){
+    constructor(container, onUpdate=null, size=400){
         //creat the canvas
        this.canvas=document.createElement("canvas");
        //set width to size
@@ -23,6 +23,7 @@ class SketchPad{
        //sets the canvas contect to 2d
        this.ctx=this.canvas.getContext("2d");
        
+       this.onUpdate=onUpdate;
        //resets the canvas and initialized some properties
        this.reset();
        //event listener that 
@@ -102,6 +103,9 @@ class SketchPad{
           this.undoBtn.disabled=false;
        }else{
           this.undoBtn.disabled=true;
+       }
+       if(this.onUpdate){
+          this.onUpdate(this.paths);
        }
     }
     //function to get mouse/touch coordinates

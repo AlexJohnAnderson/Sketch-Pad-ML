@@ -49,3 +49,21 @@ body{
    margin:1px;
    overflow:hidden;
 }
+.emphasize{
+   background-color:yellow;
+}
+#chartContainer{
+   position: fixed;
+   right: 0px;
+   top: 50%;
+   transform:translate(0, -50%);
+}
+
+#controlPanel{
+   position: fixed;
+   right: 0;
+   top: 0;
+   width:500px;
+   text-align:center;
+   padding:10px;
+}
