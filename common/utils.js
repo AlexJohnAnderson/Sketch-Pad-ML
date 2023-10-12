@@ -46,21 +46,16 @@ utils.distance=(p1,p2)=>{
  //initializes min distance using max possible number
  //loop through all points and calculates distance to point
  //if a closer point is found then replace variable, d
- utils.getNearest=(loc,points)=>{
-    let minDist=Number.MAX_SAFE_INTEGER;
-    let nearestIndex=0;
- 
-    for(let i=0;i<points.length;i++){
-       const point=points[i];
-       const d=utils.distance(loc,point);
- 
-       if(d<minDist){
-          minDist=d;
-          nearestIndex=i;
-       }
-    }
-    return nearestIndex;
- }
+ utils.getNearest=(loc,points,k=1)=>{
+    const obj=points.map((value, index)=>{
+        return {index, value};
+    });
+    const sorted=obj.sort((a,b)=>{
+        return utils.distance(loc,a.value)-utils.distance(loc,b.value)
+    });
+    const indicies=sorted.map((obj)=>obj.index);
+    return indicies.slice(0,k);
+}
 
  utils.invLerp=(a,b,v)=>{
     return (v-a)/(b-a);
