@@ -66,15 +66,21 @@ utils.distance=(p1,p2)=>{
     return (v-a)/(b-a);
  }
 
- utils.normalizePoints=(points)=>{
+ utils.normalizePoints=(points, minMax)=>{
     let min,max;
     const dimensions=points[0].length;
-    min=[...points[0]];
-    max=[...points[0]];
-    for(let i=1;i<points.length;i++){
-        for(let j=0;j<dimensions;j++){
-            min[j]=Math.min(min[j],points[i][j]);
-            max[j]=Math.max(max[j],points[i][j]);
+    if(minMax){
+        min=minMax.min;
+        max=minMax.max;
+    }
+    else{
+        min=[...points[0]];
+        max=[...points[0]];
+        for(let i=1;i<points.length;i++){
+            for(let j=0;j<dimensions;j++){
+                min[j]=Math.min(min[j],points[i][j]);
+                max[j]=Math.max(max[j],points[i][j]);
+            }
         }
     }
     for(let i=0;i<points.length;i++){
@@ -82,6 +88,7 @@ utils.distance=(p1,p2)=>{
             points[i][j]=utils.invLerp(min[j],max[j],points[i][j]);
         }
     }
+    return {min, max};
  }
 
 if(typeof module!=='undefined'){
