@@ -104,10 +104,15 @@ class SketchPad{
        }else{
           this.undoBtn.disabled=true;
        }
-       if(this.onUpdate){
-          this.onUpdate(this.paths);
-       }
+       this.triggerUpdate();
     }
+
+   triggerUpdate(){
+      if(this.onUpdate){
+         this.onUpdate(this.paths);
+      }
+   }
+   
     //function to get mouse/touch coordinates
     #getMouse=(evt)=>{
        //gets the position of the rectangleular canvas relative to the viewport

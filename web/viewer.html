@@ -14,7 +14,7 @@
         <div id="container"></div>
         <div id="controlPanel">
             <button onclick="toggleInput()">
-               Toggle Chart
+               Toggle Sketch Pad
             </button>
         </div>
 
@@ -44,7 +44,7 @@
             }
 
             const options={
-               size:400,
+               size:500,
                axesLabels:featureNames,
                styles:utils.styles,
                transparency:0.5,
@@ -53,10 +53,11 @@
 
             const chart=new Chart(chartContainer, samples, options, handleClick);
             const sketchPad = new SketchPad(inputContainer, onDrawingUpdate);
+            sketchPad.canvas.style.cssText+="outline:10000px solid rgba(0,0,0,0.7);";
             
             function onDrawingUpdate(paths){
                const point = [featureFunctions.getPathCount(paths), featureFunctions.getPointCount(paths)];
-               
+               chart.showDynamicPoint(point);
             }
         </script>
    </body>
